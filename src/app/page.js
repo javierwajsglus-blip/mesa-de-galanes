@@ -54,7 +54,6 @@ export default function Home() {
       return;
     }
 
-    // Agregar todos los miembros habituales como asistentes
     const { data: members } = await supabase
       .from('members')
       .select('id')
@@ -71,16 +70,12 @@ export default function Home() {
 
   return (
     <div className="pb-10">
-      {/* Header */}
       <div className="pt-10 pb-6 text-center">
         <div className="text-5xl mb-3">🍷</div>
-        <h1 className="text-3xl font-bold tracking-tight">Mesa de Galanes</h1>
-        <p className="text-neutral-500 text-sm mt-1">
-          La Cuenta
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight text-stone-800">Mesa de Galanes</h1>
+        <p className="text-stone-400 text-sm mt-1">La Cuenta</p>
       </div>
 
-      {/* CTA */}
       <div className="px-4">
         <button
           onClick={createEvent}
@@ -93,12 +88,11 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Historial */}
       {loading ? (
-        <div className="text-center text-neutral-600 mt-12">Cargando…</div>
+        <div className="text-center text-stone-400 mt-12">Cargando…</div>
       ) : events.length > 0 ? (
         <div className="mt-8 px-4">
-          <h2 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">
+          <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3">
             Últimas cenas
           </h2>
           <div className="space-y-2">
@@ -106,22 +100,22 @@ export default function Home() {
               <button
                 key={ev.id}
                 onClick={() => router.push(`/evento/${ev.id}`)}
-                className="w-full bg-neutral-900 hover:bg-neutral-800 rounded-xl
-                           p-4 text-left transition"
+                className="w-full bg-white hover:bg-stone-50 rounded-xl
+                           p-4 text-left transition shadow-sm border border-stone-200"
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <div className="text-sm text-neutral-400">
+                    <div className="text-sm text-stone-400">
                       {fmtDate(ev.date)}
                     </div>
-                    <div className="text-neutral-300">
+                    <div className="text-stone-700 text-lg font-medium">
                       {ev.attendeeCount} personas
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-semibold">{fmt(ev.total)}</div>
+                    <div className="font-semibold text-lg">{fmt(ev.total)}</div>
                     {ev.attendeeCount > 0 && ev.total > 0 && (
-                      <div className="text-sm text-neutral-500">
+                      <div className="text-sm text-stone-400">
                         {fmt(ev.total / ev.attendeeCount)} c/u
                       </div>
                     )}
@@ -132,7 +126,7 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className="text-center text-neutral-600 mt-12">
+        <div className="text-center text-stone-400 mt-12">
           Creá la primera cena para empezar
         </div>
       )}
